@@ -1,0 +1,5 @@
+interface:
+  display_name: "Code Review Senior"
+  short_description: "Senior review of security, perf, quality"
+policy:
+  allow_implicit_invocation: false

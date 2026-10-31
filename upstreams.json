@@ -9,8 +9,14 @@
     {
       "plugin": "1-recommended",
       "title": "Recommended",
-      "description": "Everyday set: all Matt Pocock and personal skills, plus ponytail.",
-      "include": ["mattpocock/**", "personal/**", "ponytail/ponytail"]
+      "description": "Everyday set: all Matt Pocock skills, most personal skills, plus ponytail.",
+      "include": [
+        "mattpocock/**",
+        "personal/commit-message-generator",
+        "personal/explain-in-vietnameses",
+        "personal/implement-leaf-ticket",
+        "ponytail/ponytail"
+      ]
     },
     {
       "plugin": "2-others",

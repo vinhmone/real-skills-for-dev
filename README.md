@@ -13,8 +13,8 @@ Skills are grouped by source:
 
 The installer (`npx skills add`) shows two selectable groups instead (toggle a whole group at once):
 
-- **Recommended** — all Matt Pocock skills, all personal skills, and `ponytail`.
-- **Others** — everything else (the `ponytail-*` helpers).
+- **Recommended** — all Matt Pocock skills, the personal skills (except `code-review-senior`), and `ponytail`.
+- **Others** — everything else (`code-review-senior` and the `ponytail-*` helpers).
 
 They are defined by `installerGroups` in [`upstreams.json`](upstreams.json) and written to
 [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) by `npm run generate` — don't edit that file by
@@ -110,7 +110,8 @@ description: What it does and when the agent should use it.
 Instructions…
 ```
 
-Then run `npm run generate` (or `npm run validate` to check). New personal skills go in the Recommended group.
+To put it in the Recommended group, add `personal/my-skill` to that group's `include` in [`upstreams.json`](upstreams.json)
+(otherwise it lands in Others). Then run `npm run generate` (or `npm run validate` to check).
 Skill names must be unique across all groups, because installers key on `name`.
 
 ## Skills
@@ -168,6 +169,8 @@ Synced from <https://github.com/dietrichgebert/ponytail>.
 
 | Skill | Installer group | Description |
 | --- | --- | --- |
+| [`code-review-senior`](skills/personal/code-review-senior) | Others | Senior code review skill. Analyze code changes for security, performance, code quality, architecture, and testing. Use when reviewing code changes. |
+| [`commit-message-generator`](skills/personal/commit-message-generator) | Recommended | Generate a clear, concise conventional commit message from staged code changes. Use when writing a commit message. |
 | [`explain-in-vietnameses`](skills/personal/explain-in-vietnameses) | Recommended | Giải thích các khái niệm kỹ thuật, nghiệp vụ, domain hoặc kiến trúc phức tạp bằng tiếng Việt bình dân, trực quan cho người mới bắt đầu. Giữ nguyên thuật ngữ tiếng Anh kèm nghĩa tiếng Việt, tiếng lóng/thông tục và ví dụ thực tế. Dùng khi người dùng yêu cầu "giải thích dễ hiểu", "giải thích cho người không biết gì", "nói tiếng người", "eli5", "bình dân", hoặc gọi /explain-in-vietnameses. |
 | [`implement-leaf-ticket`](skills/personal/implement-leaf-ticket) | Recommended | Implement the next leaf GitHub issue end to end: build, review, commit, push, close. |
 <!-- skills:end -->

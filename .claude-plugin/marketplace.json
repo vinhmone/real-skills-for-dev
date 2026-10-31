@@ -10,7 +10,7 @@
     {
       "name": "1-recommended",
       "source": "./",
-      "description": "Everyday set: all Matt Pocock and personal skills, plus ponytail.",
+      "description": "Everyday set: all Matt Pocock skills, most personal skills, plus ponytail.",
       "strict": false,
       "skills": [
         "./skills/mattpocock/engineering/ask-matt",
@@ -40,6 +40,7 @@
         "./skills/mattpocock/productivity/to-questionnaire",
         "./skills/mattpocock/productivity/wait-what",
         "./skills/mattpocock/productivity/writing-for-agents",
+        "./skills/personal/commit-message-generator",
         "./skills/personal/explain-in-vietnameses",
         "./skills/personal/implement-leaf-ticket",
         "./skills/ponytail/ponytail"
@@ -51,6 +52,7 @@
       "description": "Everything else.",
       "strict": false,
       "skills": [
+        "./skills/personal/code-review-senior",
         "./skills/ponytail/ponytail-audit",
         "./skills/ponytail/ponytail-debt",
         "./skills/ponytail/ponytail-gain",
