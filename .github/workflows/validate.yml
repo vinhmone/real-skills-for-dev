@@ -1,0 +1,19 @@
+name: Validate skills
+
+on:
+  push:
+    branches: [main] # direct commits to main; feature branches are covered by pull_request
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: node scripts/validate.mjs

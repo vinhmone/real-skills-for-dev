@@ -1,0 +1,71 @@
+name: Sync upstream skills
+
+on:
+  schedule:
+    - cron: "0 14 * * 0" # weekly, Sunday 14:00 UTC = 21:00 Vietnam time (UTC+7)
+  workflow_dispatch:
+    inputs:
+      upstream:
+        description: "Only sync this upstream id (blank = all)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-skills
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      - name: Sync skills
+        env:
+          UPSTREAM: ${{ inputs.upstream }}
+        run: node scripts/sync-skills.mjs $UPSTREAM --summary "$RUNNER_TEMP/summary.md"
+
+      - name: Validate
+        run: node scripts/validate.mjs
+
+      - name: Job summary
+        run: cat "$RUNNER_TEMP/summary.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Build PR body
+        id: body
+        run: |
+          {
+            echo 'text<<__EOF__'
+            echo 'Automated sync of upstream skills (`npm run sync`).'
+            echo
+            cat "$RUNNER_TEMP/summary.md"
+            echo
+            echo 'Review the diff, then merge. Pinned commits are in `upstreams.lock.json`.'
+            echo '__EOF__'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Open / update PR
+        uses: peter-evans/create-pull-request@v8
+        with:
+          # Optional SKILLS_SYNC_TOKEN (PAT): PRs opened with GITHUB_TOKEN don't trigger other workflows.
+          token: ${{ secrets.SKILLS_SYNC_TOKEN || secrets.GITHUB_TOKEN }}
+          branch: bot/sync-skills
+          delete-branch: true
+          commit-message: "chore: sync upstream skills"
+          title: "chore: sync upstream skills"
+          body: ${{ steps.body.outputs.text }}
+          labels: skills-sync
+          add-paths: |
+            skills/**
+            licenses/**
+            upstreams.lock.json
+            README.md
+            .claude-plugin/**

@@ -1,0 +1,15 @@
+{
+  "name": "real-skills-for-dev",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": "vinhmone",
+  "description": "Personal collection of AI agent skills, installable with `npx skills add`.",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "sync": "node scripts/sync-skills.mjs",
+    "generate": "node scripts/generate.mjs",
+    "validate": "node scripts/validate.mjs"
+  }
+}

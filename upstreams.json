@@ -1,0 +1,46 @@
+{
+  "$comment": "`groups`: source folders under skills/ (README tables). `installerGroups`: the selectable groups in `npx skills add`, written to .claude-plugin/marketplace.json by `npm run generate`. Each skill goes in the FIRST installer group whose `include` pattern matches its path under skills/ (`folder/**`, `**`, or an exact path); the CLI sorts groups by `plugin` name. `upstreams`: run `npm run sync` to pull them; each is copied into `dest` (wiped first) and `skills` lists which skill folders to take.",
+  "groups": [
+    { "folder": "mattpocock", "title": "Matt Pocock" },
+    { "folder": "ponytail", "title": "Ponytail" },
+    { "folder": "personal", "title": "Personal" }
+  ],
+  "installerGroups": [
+    {
+      "plugin": "1-recommended",
+      "title": "Recommended",
+      "description": "Everyday set: all Matt Pocock and personal skills, plus ponytail.",
+      "include": ["mattpocock/**", "personal/**", "ponytail/ponytail"]
+    },
+    {
+      "plugin": "2-others",
+      "title": "Others",
+      "description": "Everything else.",
+      "include": ["**"]
+    }
+  ],
+  "upstreams": [
+    {
+      "id": "mattpocock",
+      "name": "Matt Pocock",
+      "repo": "https://github.com/mattpocock/skills",
+      "branch": "main",
+      "dest": "skills/mattpocock",
+      "skillsRoot": "skills",
+      "skills": {
+        "fromPluginManifest": ".claude-plugin/plugin.json"
+      },
+      "license": "LICENSE"
+    },
+    {
+      "id": "ponytail",
+      "name": "Ponytail (Dietrich Gebert)",
+      "repo": "https://github.com/dietrichgebert/ponytail",
+      "branch": "main",
+      "dest": "skills/ponytail",
+      "skillsRoot": "skills",
+      "skills": "all",
+      "license": "LICENSE"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "name": "real-skills-for-dev",
+  "owner": {
+    "name": "vinhmone"
+  },
+  "metadata": {
+    "description": "Personal collection of AI agent skills, installable with `npx skills add`."
+  },
+  "plugins": [
+    {
+      "name": "1-recommended",
+      "source": "./",
+      "description": "Everyday set: all Matt Pocock and personal skills, plus ponytail.",
+      "strict": false,
+      "skills": [
+        "./skills/mattpocock/engineering/ask-matt",
+        "./skills/mattpocock/engineering/code-review",
+        "./skills/mattpocock/engineering/codebase-design",
+        "./skills/mattpocock/engineering/diagnosing-bugs",
+        "./skills/mattpocock/engineering/domain-modeling",
+        "./skills/mattpocock/engineering/grill-with-docs",
+        "./skills/mattpocock/engineering/implement",
+        "./skills/mattpocock/engineering/implement-spec",
+        "./skills/mattpocock/engineering/improve-codebase-architecture",
+        "./skills/mattpocock/engineering/pr",
+        "./skills/mattpocock/engineering/prototype",
+        "./skills/mattpocock/engineering/research",
+        "./skills/mattpocock/engineering/retro",
+        "./skills/mattpocock/engineering/setup-matt-pocock-skills",
+        "./skills/mattpocock/engineering/tdd",
+        "./skills/mattpocock/engineering/to-spec",
+        "./skills/mattpocock/engineering/to-tickets",
+        "./skills/mattpocock/engineering/triage",
+        "./skills/mattpocock/engineering/wayfinder",
+        "./skills/mattpocock/engineering/wizard",
+        "./skills/mattpocock/productivity/grill-me",
+        "./skills/mattpocock/productivity/grilling",
+        "./skills/mattpocock/productivity/handoff",
+        "./skills/mattpocock/productivity/teach",
+        "./skills/mattpocock/productivity/to-questionnaire",
+        "./skills/mattpocock/productivity/wait-what",
+        "./skills/mattpocock/productivity/writing-for-agents",
+        "./skills/personal/explain-in-vietnameses",
+        "./skills/personal/implement-leaf-ticket",
+        "./skills/ponytail/ponytail"
+      ]
+    },
+    {
+      "name": "2-others",
+      "source": "./",
+      "description": "Everything else.",
+      "strict": false,
+      "skills": [
+        "./skills/ponytail/ponytail-audit",
+        "./skills/ponytail/ponytail-debt",
+        "./skills/ponytail/ponytail-gain",
+        "./skills/ponytail/ponytail-help",
+        "./skills/ponytail/ponytail-review"
+      ]
+    }
+  ]
+}
