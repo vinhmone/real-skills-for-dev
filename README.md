@@ -10,11 +10,13 @@ Skills are grouped by source:
 | 1. Matt Pocock | `skills/mattpocock` | <https://github.com/mattpocock/skills> (synced automatically) |
 | 2. Ponytail | `skills/ponytail` | <https://github.com/dietrichgebert/ponytail> (synced automatically) |
 | 3. Personal | `skills/personal` | Written here |
+| 4. Office | `skills/office` | <https://github.com/anthropics/skills/tree/main/skills> (synced automatically) |
 
-The installer (`npx skills add`) shows two selectable groups instead (toggle a whole group at once):
+The installer (`npx skills add`) shows three selectable groups instead (toggle a whole group at once):
 
 - **Recommended** — all Matt Pocock skills, the personal skills (except `code-review-senior`), and `ponytail`.
 - **Others** — everything else (`code-review-senior` and the `ponytail-*` helpers).
+- **Office** — Anthropic's `docx`, `pdf`, `pptx`, and `xlsx` skills.
 
 They are defined by `installerGroups` in [`upstreams.json`](upstreams.json) and written to
 [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json) by `npm run generate` — don't edit that file by
@@ -80,17 +82,20 @@ pinned in [`upstreams.lock.json`](upstreams.lock.json).
 ```bash
 npm run sync              # pull the latest skills from every upstream
 npm run sync -- ponytail  # just one upstream
+npm run sync -- office    # just the four Office skills
 npm run validate          # check SKILL.md frontmatter, unique names, generated files
 ```
 
 `npm run sync` wipes and re-copies each upstream's folder (so skills deleted upstream disappear here too), copies
-the upstream license into `licenses/`, and regenerates the tables below plus `.claude-plugin/marketplace.json`.
+configured upstream licenses into `licenses/`, preserves licenses inside skill folders, and regenerates the tables
+below plus `.claude-plugin/marketplace.json`. Office syncs only `docx`, `pdf`, `pptx`, and `xlsx`, including their
+supporting scripts and assets.
 The pinned commit only moves when skill content actually changed.
 
 The [Sync upstream skills](.github/workflows/sync-skills.yml) workflow does this every Sunday at 21:00 (UTC+7), or
 on demand from the Actions tab, and opens/updates a PR on the `bot/sync-skills` branch when anything changed.
 
-Don't hand-edit files under `skills/mattpocock` or `skills/ponytail` — the next sync overwrites them. Put your
+Don't hand-edit files under `skills/mattpocock`, `skills/ponytail`, or `skills/office` — the next sync overwrites them. Put your
 own skills (or customised copies with a different `name`) in `skills/personal`.
 
 ## Adding a personal skill
@@ -173,9 +178,25 @@ Synced from <https://github.com/dietrichgebert/ponytail>.
 | [`commit-message-generator`](skills/personal/commit-message-generator) | Recommended | Generate a clear, concise conventional commit message from staged code changes. Use when writing a commit message. |
 | [`explain-in-vietnameses`](skills/personal/explain-in-vietnameses) | Recommended | Giải thích các khái niệm kỹ thuật, nghiệp vụ, domain hoặc kiến trúc phức tạp bằng tiếng Việt bình dân, trực quan cho người mới bắt đầu. Giữ nguyên thuật ngữ tiếng Anh kèm nghĩa tiếng Việt, tiếng lóng/thông tục và ví dụ thực tế. Dùng khi người dùng yêu cầu "giải thích dễ hiểu", "giải thích cho người không biết gì", "nói tiếng người", "eli5", "bình dân", hoặc gọi /explain-in-vietnameses. |
 | [`implement-leaf-ticket`](skills/personal/implement-leaf-ticket) | Recommended | Implement the next leaf GitHub issue end to end: build, review, commit, push, close. |
+
+### 4. Office (`skills/office`)
+
+Synced from <https://github.com/anthropics/skills>.
+
+| Skill | Installer group | Description |
+| --- | --- | --- |
+| [`docx`](skills/office/docx) | Office | Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files) or Word templates (.dotx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', '.dotx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx or .dotx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation. |
+| [`pdf`](skills/office/pdf) | Office | Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill. |
+| [`pptx`](skills/office/pptx) | Office | Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates (.potx), layouts, speaker notes, or comments. Trigger whenever the user mentions "deck," "slides," "presentation," or references a .pptx or .potx filename, regardless of what they plan to do with the content afterward. If a .pptx or .potx file needs to be opened, created, or touched, use this skill. |
+| [`xlsx`](skills/office/xlsx) | Office | Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like "the xlsx in my downloads") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved. |
 <!-- skills:end -->
 
 ## Licenses
 
-This repo (scripts and `skills/personal`) is [MIT](LICENSE). Upstream skills keep their original licenses
-(both MIT), copied to [`licenses/`](licenses).
+This repo (scripts and `skills/personal`) is [MIT](LICENSE). Matt Pocock and Ponytail skills retain their MIT
+licenses, copied to [`licenses/`](licenses).
+
+Office skills retain Anthropic's license in each skill folder:
+[`docx`](skills/office/docx/LICENSE.txt), [`pdf`](skills/office/pdf/LICENSE.txt),
+[`pptx`](skills/office/pptx/LICENSE.txt), and [`xlsx`](skills/office/xlsx/LICENSE.txt).
+These are not MIT-licensed; their terms include restrictions on copying, modification, and redistribution.

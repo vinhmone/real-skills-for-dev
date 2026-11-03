@@ -45,5 +45,16 @@
       "ponytail-help",
       "ponytail-review"
     ]
+  },
+  "office": {
+    "repo": "https://github.com/anthropics/skills",
+    "branch": "main",
+    "commit": "ca45fc496a3436251f191354091d557da31c15b5",
+    "skills": [
+      "docx",
+      "pdf",
+      "pptx",
+      "xlsx"
+    ]
   }
 }

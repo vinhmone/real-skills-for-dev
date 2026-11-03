@@ -3,7 +3,8 @@
   "groups": [
     { "folder": "mattpocock", "title": "Matt Pocock" },
     { "folder": "ponytail", "title": "Ponytail" },
-    { "folder": "personal", "title": "Personal" }
+    { "folder": "personal", "title": "Personal" },
+    { "folder": "office", "title": "Office" }
   ],
   "installerGroups": [
     {
@@ -17,6 +18,12 @@
         "personal/implement-leaf-ticket",
         "ponytail/ponytail"
       ]
+    },
+    {
+      "plugin": "3-office",
+      "title": "Office",
+      "description": "Anthropic skills for Word documents, PDFs, PowerPoint presentations, and spreadsheets.",
+      "include": ["office/**"]
     },
     {
       "plugin": "2-others",
@@ -47,6 +54,15 @@
       "skillsRoot": "skills",
       "skills": "all",
       "license": "LICENSE"
+    },
+    {
+      "id": "office",
+      "name": "Office (Anthropic)",
+      "repo": "https://github.com/anthropics/skills",
+      "branch": "main",
+      "dest": "skills/office",
+      "skillsRoot": "skills",
+      "skills": ["skills/docx", "skills/pdf", "skills/pptx", "skills/xlsx"]
     }
   ]
 }

@@ -47,6 +47,18 @@
       ]
     },
     {
+      "name": "3-office",
+      "source": "./",
+      "description": "Anthropic skills for Word documents, PDFs, PowerPoint presentations, and spreadsheets.",
+      "strict": false,
+      "skills": [
+        "./skills/office/docx",
+        "./skills/office/pdf",
+        "./skills/office/pptx",
+        "./skills/office/xlsx"
+      ]
+    },
+    {
       "name": "2-others",
       "source": "./",
       "description": "Everything else.",
