@@ -1,5 +1,0 @@
-interface:
-  display_name: "Security Audit"
-  short_description: "Security guidance and vulnerability review"
-policy:
-  allow_implicit_invocation: false
