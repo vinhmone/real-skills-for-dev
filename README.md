@@ -9,7 +9,7 @@ Skills are grouped by source:
 | --- | --- | --- |
 | 1. Matt Pocock | `skills/mattpocock` | <https://github.com/mattpocock/skills> (synced automatically) |
 | 2. Ponytail | `skills/ponytail` | <https://github.com/dietrichgebert/ponytail> (synced automatically) |
-| 3. Personal | `skills/personal` | Written here |
+| 3. Personal | `skills/personal` | Written here, plus Cloudflare's synced security audit skill |
 | 4. Office | `skills/office` | <https://github.com/anthropics/skills/tree/main/skills> (synced automatically) |
 
 The installer (`npx skills add`) shows three selectable groups instead (toggle a whole group at once):
@@ -83,6 +83,7 @@ pinned in [`upstreams.lock.json`](upstreams.lock.json).
 npm run sync              # pull the latest skills from every upstream
 npm run sync -- ponytail  # just one upstream
 npm run sync -- office    # just the four Office skills
+npm run sync -- security-audit # just Cloudflare's security audit skill
 npm run validate          # check SKILL.md frontmatter, unique names, generated files
 ```
 
@@ -90,6 +91,8 @@ npm run validate          # check SKILL.md frontmatter, unique names, generated 
 configured upstream licenses into `licenses/`, preserves licenses inside skill folders, and regenerates the tables
 below plus `.claude-plugin/marketplace.json`. Office syncs only `docx`, `pdf`, `pptx`, and `xlsx`, including their
 supporting scripts and assets.
+Cloudflare's [security-audit](https://github.com/cloudflare/security-audit-skill) syncs only into
+`skills/personal/security-audit`, preserving the other personal skills.
 The pinned commit only moves when skill content actually changed.
 
 The [Sync upstream skills](.github/workflows/sync-skills.yml) workflow does this every Sunday at 21:00 (UTC+7), or
@@ -97,6 +100,7 @@ on demand from the Actions tab, and opens/updates a PR on the `bot/sync-skills` 
 
 Don't hand-edit files under `skills/mattpocock`, `skills/ponytail`, or `skills/office` — the next sync overwrites them. Put your
 own skills (or customised copies with a different `name`) in `skills/personal`.
+The exception is `skills/personal/security-audit`: it is managed by upstream sync, so don't hand-edit it either.
 
 ## Adding a personal skill
 
@@ -178,6 +182,7 @@ Synced from <https://github.com/dietrichgebert/ponytail>.
 | [`commit-message-generator`](skills/personal/commit-message-generator) | Recommended | Generate a clear, concise conventional commit message from staged code changes. Use when writing a commit message. |
 | [`explain-in-vietnameses`](skills/personal/explain-in-vietnameses) | Recommended | Giải thích các khái niệm kỹ thuật, nghiệp vụ, domain hoặc kiến trúc phức tạp bằng tiếng Việt bình dân, trực quan cho người mới bắt đầu. Giữ nguyên thuật ngữ tiếng Anh kèm nghĩa tiếng Việt, tiếng lóng/thông tục và ví dụ thực tế. Dùng khi người dùng yêu cầu "giải thích dễ hiểu", "giải thích cho người không biết gì", "nói tiếng người", "eli5", "bình dân", hoặc gọi /explain-in-vietnameses. |
 | [`implement-leaf-ticket`](skills/personal/implement-leaf-ticket) | Recommended | Implement the next leaf GitHub issue end to end: build, review, commit, push, close. |
+| [`security-audit`](skills/personal/security-audit) | Recommended | Security guidance and vulnerability review for codebases, APIs, services, CLI tools, libraries, and daemons. Use for security questions, focused reviews, vulnerability research, security audits, or pen tests. Run the complete workflow only for explicit codebase audit or pen-test requests, full/comprehensive/end-to-end reviews, or requested report artifacts. |
 
 ### 4. Office (`skills/office`)
 
@@ -193,8 +198,9 @@ Synced from <https://github.com/anthropics/skills>.
 
 ## Licenses
 
-This repo (scripts and `skills/personal`) is [MIT](LICENSE). Matt Pocock and Ponytail skills retain their MIT
+This repo (scripts and locally authored personal skills) is [MIT](LICENSE). Matt Pocock and Ponytail skills retain their MIT
 licenses, copied to [`licenses/`](licenses).
+Cloudflare's security audit skill retains its [MIT license](licenses/security-audit.LICENSE).
 
 Office skills retain Anthropic's license in each skill folder:
 [`docx`](skills/office/docx/LICENSE.txt), [`pdf`](skills/office/pdf/LICENSE.txt),

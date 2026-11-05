@@ -16,6 +16,7 @@
         "personal/commit-message-generator",
         "personal/explain-in-vietnameses",
         "personal/implement-leaf-ticket",
+        "personal/security-audit",
         "ponytail/ponytail"
       ]
     },
@@ -53,6 +54,16 @@
       "dest": "skills/ponytail",
       "skillsRoot": "skills",
       "skills": "all",
+      "license": "LICENSE"
+    },
+    {
+      "id": "security-audit",
+      "name": "Security Audit (Cloudflare)",
+      "repo": "https://github.com/cloudflare/security-audit-skill",
+      "branch": "main",
+      "dest": "skills/personal/security-audit",
+      "skillsRoot": "skills/security-audit",
+      "skills": ["skills/security-audit"],
       "license": "LICENSE"
     },
     {

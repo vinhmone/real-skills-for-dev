@@ -7,7 +7,7 @@
 import { execFileSync } from "node:child_process";
 import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join, relative, resolve } from "node:path";
+import { basename, dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { findSkillDirs, hashDir, toPosix } from "./lib/skills.mjs";
 import { generate } from "./generate.mjs";
@@ -122,14 +122,14 @@ function resolveSkills(up, repoDir) {
   return dirs;
 }
 
-/** Where an upstream skill lands inside `dest`: keep its path under skillsRoot (e.g. engineering/tdd). */
+/** Keep paths under skillsRoot; when skillsRoot is the skill itself, copy directly into dest. */
 function destRel(up, repoDir, src) {
   const rel = relative(join(repoDir, up.skillsRoot ?? "."), src);
-  return rel.startsWith("..") || rel === "" ? src.split(/[\\/]/).pop() : rel;
+  return rel.startsWith("..") ? src.split(/[\\/]/).pop() : rel;
 }
 
 function skillHashes(dest) {
-  return Object.fromEntries(findSkillDirs(dest).map((d) => [toPosix(relative(dest, d)), hashDir(d)]));
+  return Object.fromEntries(findSkillDirs(dest).map((d) => [toPosix(relative(dest, d)) || basename(d), hashDir(d)]));
 }
 
 function fail(msg) {

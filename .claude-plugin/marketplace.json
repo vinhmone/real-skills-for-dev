@@ -43,6 +43,7 @@
         "./skills/personal/commit-message-generator",
         "./skills/personal/explain-in-vietnameses",
         "./skills/personal/implement-leaf-ticket",
+        "./skills/personal/security-audit",
         "./skills/ponytail/ponytail"
       ]
     },

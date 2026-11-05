@@ -56,5 +56,13 @@
       "pptx",
       "xlsx"
     ]
+  },
+  "security-audit": {
+    "repo": "https://github.com/cloudflare/security-audit-skill",
+    "branch": "main",
+    "commit": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
+    "skills": [
+      "security-audit"
+    ]
   }
 }
