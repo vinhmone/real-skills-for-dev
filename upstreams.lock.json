@@ -49,7 +49,7 @@
   "office": {
     "repo": "https://github.com/anthropics/skills",
     "branch": "main",
-    "commit": "ca45fc496a3436251f191354091d557da31c15b5",
+    "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
     "skills": [
       "docx",
       "pdf",
