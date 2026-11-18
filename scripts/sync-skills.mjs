@@ -9,6 +9,7 @@ import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, write
 import { tmpdir } from "node:os";
 import { basename, dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { applyOverlay } from "./lib/overlay.mjs";
 import { findSkillDirs, hashDir, toPosix } from "./lib/skills.mjs";
 import { generate } from "./generate.mjs";
 
@@ -66,6 +67,8 @@ function syncOne(up) {
     rmSync(dest, { recursive: true, force: true });
     mkdirSync(dest, { recursive: true });
     for (const src of sources) cpSync(src, join(dest, destRel(up, tmp, src)), { recursive: true });
+    // Re-apply local customisations before hashing, so they never count as upstream changes.
+    applyOverlay(ROOT, up);
     if (up.license && existsSync(join(tmp, up.license))) {
       mkdirSync(join(ROOT, "licenses"), { recursive: true });
       cpSync(join(tmp, up.license), join(ROOT, "licenses", `${up.id}.LICENSE`));

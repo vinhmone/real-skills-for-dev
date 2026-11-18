@@ -1,5 +1,5 @@
 {
-  "$comment": "`groups`: source folders under skills/ (README tables). `installerGroups`: the selectable groups in `npx skills add`, written to .claude-plugin/marketplace.json by `npm run generate`. Each skill goes in the FIRST installer group whose `include` pattern matches its path under skills/ (`folder/**`, `**`, or an exact path); the CLI sorts groups by `plugin` name. `upstreams`: run `npm run sync` to pull them; each is copied into `dest` (wiped first) and `skills` lists which skill folders to take.",
+  "$comment": "`groups`: source folders under skills/ (README tables). `installerGroups`: the selectable groups in `npx skills add`, written to .claude-plugin/marketplace.json by `npm run generate`. Each skill goes in the FIRST installer group whose `include` pattern matches its path under skills/ (`folder/**`, `**`, or an exact path); the CLI sorts groups by `plugin` name. `upstreams`: run `npm run sync` to pull them; each is copied into `dest` (wiped first) and `skills` lists which skill folders to take. Optional `overlay` is re-applied after every sync: `files` is a folder mirroring `dest` whose files are copied over the synced copy, `frontmatter` maps a skill (path under `dest`, or its folder name when `dest` is the skill) to SKILL.md frontmatter keys to set.",
   "groups": [
     { "folder": "mattpocock", "title": "Matt Pocock" },
     { "folder": "ponytail", "title": "Ponytail" },
@@ -65,7 +65,13 @@
       "dest": "skills/personal/security-audit",
       "skillsRoot": "skills/security-audit",
       "skills": ["skills/security-audit"],
-      "license": "LICENSE"
+      "license": "LICENSE",
+      "overlay": {
+        "files": "overlays/security-audit",
+        "frontmatter": {
+          "security-audit": { "disable-model-invocation": true }
+        }
+      }
     },
     {
       "id": "office",

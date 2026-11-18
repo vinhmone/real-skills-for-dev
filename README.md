@@ -102,6 +102,16 @@ Don't hand-edit files under `skills/mattpocock`, `skills/ponytail`, or `skills/o
 own skills (or customised copies with a different `name`) in `skills/personal`.
 The exception is `skills/personal/security-audit`: it is managed by upstream sync, so don't hand-edit it either.
 
+To customise a synced skill, add an `overlay` to its upstream in [`upstreams.json`](upstreams.json) — sync
+re-applies it after every pull, before deciding whether anything changed, and `npm run validate` fails if the
+working tree doesn't match it:
+
+- `files`: a folder mirroring the upstream's `dest`; each file is copied over the synced copy.
+- `frontmatter`: SKILL.md frontmatter keys to set, per skill.
+
+`security-audit` uses both: [`overlays/security-audit`](overlays/security-audit) adds `agents/openai.yaml`, and
+`disable-model-invocation: true` keeps it from loading unless invoked explicitly.
+
 ## Adding a personal skill
 
 ```bash

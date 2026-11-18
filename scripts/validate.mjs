@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 // Sanity checks run in CI: every skill has a valid SKILL.md, names are unique, generated files are current.
-import { dirname, resolve } from "node:path";
+import { readFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { staleOutputs } from "./generate.mjs";
+import { overlayDrift } from "./lib/overlay.mjs";
 import { listRepoSkills } from "./lib/skills.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -22,6 +24,11 @@ for (const s of skills) {
   if (name && name !== s.folder) warnings.push(`${where}: name "${name}" differs from folder "${s.folder}"`);
   if (name && seen.has(name)) errors.push(`${where}: name "${name}" is also used by skills/${seen.get(name)} (installers key on name)`);
   if (name) seen.set(name, s.rel);
+}
+
+const { upstreams = [] } = JSON.parse(readFileSync(join(ROOT, "upstreams.json"), "utf8"));
+for (const up of upstreams) {
+  for (const d of overlayDrift(ROOT, up)) errors.push(`overlay not applied: ${d} — run \`npm run sync -- ${up.id}\``);
 }
 
 try {
