@@ -1,0 +1,3 @@
+interface:
+  display_name: "Commit Message Generator"
+  short_description: "Conventional commit message from staged diff"

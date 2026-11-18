@@ -1,0 +1,5 @@
+interface:
+  display_name: "Rate Tickets"
+  short_description: "Label GitHub tickets by complexity and area"
+policy:
+  allow_implicit_invocation: false

@@ -16,6 +16,7 @@
         "personal/commit-message-generator",
         "personal/explain-in-vietnameses",
         "personal/implement-leaf-ticket",
+        "personal/rate-tickets",
         "personal/security-audit",
         "ponytail/ponytail"
       ]
